@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2026. All rights reserved
+* Copyright (c) 2026 KonataBSD. All rights reserved
 *
 * written by KonataBSD
 *

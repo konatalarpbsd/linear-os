@@ -11,7 +11,7 @@
 
 /* does heavy initialization
 * still under development
-* may have bugs and vulnerabilities
+* may have bugs
 * I mostly focused on building right now than fixing bugs/code and potential vulnerability.
 */
 
@@ -37,8 +37,8 @@
 #include <qspi.h>
 
 #define TIMEOUT_MAX 100000
-#define STACK_BASE ((uint64_t*)0xFFFFFFFEUL)
-#define STACK_END ((uint64_t*)0xFFFFBFFEUL)
+#define STACK_BASE ((uint32_t*)0xFFFFFFFEUL)
+#define STACK_END ((uint32_t*)0xFFFFBFFEUL)
 int timeout = 0;
 
 struct sdhci host;
@@ -134,9 +134,9 @@ val = BIT(0) | BIT(1);
 writel(&WDT_MODE, val);
 writel(&WDT_RESTART, 0x1999);
 
-uint64_t *st_canary = STACK_END;
+uint32_t *st_canary = STACK_END;
 
-memcpy(st_canary, "0xAA55AA55AA55AA55A", sizeof(uint16_t));
+writel(&st_canary, 0xAA55AA55);
 
 int a = 0xABCD;
 int b = 0xEF12;
@@ -161,7 +161,6 @@ if(sram[i] != EXPCTD_PATTERN) while(1);
 }
 
 
-
 writeb(&RESET_CTRL, BIT(0));
 
 val2 = 0xDF0D;
@@ -171,20 +170,13 @@ if((wait_bit_clear_16(&EFUSE_WR_LOCK, 0)) != 0) wfi();
 
 writeb(&EFUSE_CFG, 0x2);
 
-// writel(&XMPU_R00_START, 0xffff0000);
-// writel(&XMPU_R00_END, 0xffffbfff);
-val = BIT(4) | BIT(1) | BIT(0);
-// writel(&XMPU_R00_CFG, val);
-
 xmpu_ocm_init(&ocm_x, XMPU_OCM_ADDR, 0xffff0000, 0xffffbfff, val);
 
-// BIT_CLEAR(XMPU_R00_CFG, BIT(3));
-
-// writel(&EFUSE_CFG, BIT(1));
+writew(&EFUSE_CFG, BIT(1));
 // BIT_CLEAR(EFUSE_PGM_ADDR, 10);
 // BIT_CLEAR(EFUSE_PGM_ADDR, 11);
 
-// writew(&EFUSE_SECCTRL, BIT(6));
+writew(&EFUSE_SECCTRL, BIT(6));
 
 val = (3 << 20) | (3 << 24);
 writel(&IOPLL_CTRL, val);
@@ -290,6 +282,7 @@ val = readl(&AMS_VCC_PSBATT);
 uint16_t voltage = val >> 6;
 puthex(val);
 puthex(voltage);
+putc('\n');
 
 val = (6 << 2);
 
@@ -304,16 +297,10 @@ printf("I2C1 reset\n");
 val2 = 0xFFFF;
 writew(&I2C1_INTSTS, val2);
 
-// const char *canary = "0xAA55AA55AA55AA55A";
-
-// if((memcmp(canary, STACK_END, sizeof(uint16_t)))) {
-
-/*
-if((char)STACK_END != canary) {
-printf("Stack overflow!\n");
-while(1) wfi();
+if((uint32_t*)st_canary != 0xAA55AA55) {
+printf("stack overflow\n");
+while(1);
 }
-*/
 
 spi_init();
 usb_init();
