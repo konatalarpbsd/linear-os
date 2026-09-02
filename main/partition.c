@@ -1,3 +1,14 @@
+/*
+* Copyright (c) 2026. All rights reserved
+*
+* written by KonataBSD
+*
+* This code is licensed under the GNU GPL v2 or later
+*/
+
+
+// under development, not completed
+
 #include <utils.h>
 #include <partition.h>
 

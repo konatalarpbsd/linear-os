@@ -1,3 +1,20 @@
+/*
+* Copyright (c) 2026 KonataBSD. All rights reserved
+*
+* written by KonataBSD
+*
+* This code is licensed under the GNU GPL v2 or later
+*/
+
+
+// main.c
+
+/* does heavy initialization
+* still under development
+* may have bugs and vulnerabilities
+* I mostly focused on building right now than fixing bugs/code and potential vulnerability.
+*/
+
 #include <stdint.h>
 #include <utils.h>
 #include <uart.h>
@@ -287,7 +304,7 @@ printf("I2C1 reset\n");
 val2 = 0xFFFF;
 writew(&I2C1_INTSTS, val2);
 
-const char *canary = "0xAA55AA55AA55AA55A";
+// const char *canary = "0xAA55AA55AA55AA55A";
 
 // if((memcmp(canary, STACK_END, sizeof(uint16_t)))) {
 
@@ -305,12 +322,15 @@ sdhci_init(&host, SDHCI0_BASE);
 writel(&RST_LPD_IOU2, BIT(20));
 
 partition_map_init(&h);
-char *hitler = "balls";
-create_partition(hitler, 2, 2, 1, 0x4000, 0x2000);
+char *test = "testpartitionmapentry1";
+create_partition(test, 2, 2, 1, 0x4000, 0x2000);
 
 val2 = readw(&BOOT_MODE_USER);
 
 uint16_t boot_mode = (val2 >> 12) & 0xF;
+
+// old code, still thinking plans at this section
+// do not modify
 
 switch(boot_mode) {
 
