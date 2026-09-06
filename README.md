@@ -6,7 +6,7 @@ Made on shitty redmi 12c with partially broken hardware and barely survived for 
 
 Features:
 
-Full boot process(EL3 to EL0 and replaces default firmwares and fsbl)
+Full boot process(EL3 to EL0 and replaces default firmwares i guess or might not... and replaces fsbl)
 
 Under development:
 
