@@ -10,15 +10,8 @@ Full boot process(EL3 to EL0 and replaces default firmwares i guess or might not
 
 Under development:
 
-SATA support
-NIC/Ethernet support
-USB support
-NAND/eMMC
-etc.
+SATA support, NIC/Ethernet support, USB support, NAND/eMMC, etc.
 
 Future plans:
 
-Other board support
-HALs
-Hypervisor
-More dynamic code instead of hardcoded
+Other board support, HALs, Hypervisor, More dynamic code instead of hardcoded
