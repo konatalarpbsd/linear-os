@@ -18,4 +18,4 @@ Other board support, HALs, Hypervisor, More dynamic code instead of hardcoded
 
 
 I recommend to use qemu amd fork to boot linear OS instead of mainline qemu(qemu-system-aarch64 and qemu-system-microblazeel)
-And optionally SystemC
+and SystemC if you wanna run those qemus(remote-port) but im still building my own pmufw 
