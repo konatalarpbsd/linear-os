@@ -15,3 +15,7 @@ SATA support, NIC/Ethernet support, USB support, NAND/eMMC, etc.
 Future plans:
 
 Other board support, HALs, Hypervisor, More dynamic code instead of hardcoded
+
+
+I recommend to use qemu amd fork to boot linear OS instead of mainline qemu(qemu-system-aarch64 and qemu-system-microblazeel)
+And optionally SystemC
