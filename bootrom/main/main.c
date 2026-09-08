@@ -12,7 +12,7 @@
 /* does heavy initialization
 * still under development
 * may have bugs
-* I mostly focused on building right now than fixing bugs/code and potential vulnerability.
+* I mostly focused on building right now
 */
 
 #include <stdint.h>
