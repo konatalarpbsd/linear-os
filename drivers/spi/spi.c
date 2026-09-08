@@ -1,3 +1,11 @@
+/*
+* Copyright (c) 2026 KonataBSD. All rights reserved
+*
+* written by KonataBSD
+*
+* This code is licensed under the GNU GPL v2 or later
+*/
+
 #include <utils.h>
 #include <spi.h>
 
@@ -66,6 +74,7 @@ writel(&SPI_EN, BIT(0));
 unsigned char buf[8];
 spi_get_jedec_id(buf, 8);
 
+// jedec id test
 printf("Jedec id: ");
 puthex(buf[0]);
 puthex(buf[1]);
