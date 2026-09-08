@@ -75,7 +75,7 @@ writel(&SPI_EN, BIT(0));
 unsigned char buf[8];
 spi_get_jedec_id(buf, 8);
 
-// jedec id tezt
+// jedec id test
 printf("Jedec id: ");
 puthex(buf[0]);
 puthex(buf[1]);
