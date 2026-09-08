@@ -50,7 +50,7 @@ unsigned char *spi_get_jedec_id(unsigned char *rx_buf, size_t tx_size_buf) {
 
 unsigned char tx_buf[tx_size_buf];
 
-memset(tx_buf
+memset(tx_buf, 0, sizeof(tx_size_buf));
 
 tx_buf[0] = 0x9F;
 tx_buf[1] = 0x00;
