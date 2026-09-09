@@ -12,7 +12,7 @@
 /* does heavy initialization
 * still under development
 * may have bugs
-* I mostly focused on building right now
+* I mostly focused on building right now than fixing bugs/code and potential vulnerability.
 */
 
 #include <stdint.h>
@@ -170,7 +170,7 @@ if((wait_bit_clear_16(&EFUSE_WR_LOCK, 0)) != 0) wfi();
 
 writeb(&EFUSE_CFG, 0x2);
 
-xmpu_ocm_init(&ocm_x, XMPU_OCM_ADDR, 0xffff0000, 0xffffbfff, val);
+xmpu_ocm_init(&ocm_x, XMPU_OCM_ADDR, 0xfffc0000, 0xffffbfff, val);
 
 writew(&EFUSE_CFG, BIT(1));
 // BIT_CLEAR(EFUSE_PGM_ADDR, 10);
