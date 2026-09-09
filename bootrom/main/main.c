@@ -191,13 +191,13 @@ writel(&RPLL_CTRL, BIT(3));
 writel(&IOPLL_CTRL, BIT(0));
 writel(&RPLL_CTRL, BIT(0));
 
-if((wait_bit_clear_32(&CRL_PLL_STS, 0)) != 0)
+while((wait_bit_clear_32(&CRL_PLL_STS, 0)) != 0)
 nop();
 
 BIT_CLEAR(IOPLL_CTRL, 3);
 BIT_CLEAR(RPLL_CTRL, 3);
 
-if((wait_bit_clear_32(&CRL_PLL_STS, 1)) != 0)
+while((wait_bit_clear_32(&CRL_PLL_STS, 1)) != 0)
 nop();
 
 val = (3 << 20) | (3 << 24);
@@ -209,7 +209,7 @@ wait_bit_set_32(&PLL_STS, 1);
 
 BIT_CLEAR(DPLL_CTRL, 3);
 
-if((wait_bit_set_32(&PLL_STS, 4)) != 0)
+while((wait_bit_set_32(&PLL_STS, 4)) != 0)
 nop();
 
 val = (3 << 20) | (3 << 24);
@@ -217,12 +217,12 @@ writel(&VPLL_CTRL, val);
 writel(&VPLL_CTRL, BIT(3));
 writel(&VPLL_CTRL, BIT(0));
 
-if((wait_bit_set_32(&PLL_STS, 2)) != 0)
+while((wait_bit_set_32(&PLL_STS, 2)) != 0)
 nop();
 
 BIT_CLEAR(VPLL_CTRL, 3);
 
-if((wait_bit_set_32(&PLL_STS, 5)) != 0)
+while((wait_bit_set_32(&PLL_STS, 5)) != 0)
 nop();
 
 
@@ -232,12 +232,12 @@ writel(&APLL_CTRL, BIT(3));
 writel(&APLL_CTRL, BIT(0));
 
 
-if((wait_bit_set_32(&PLL_STS, 0)) != 0)
+while((wait_bit_set_32(&PLL_STS, 0)) != 0)
 nop();
 
 BIT_CLEAR(APLL_CTRL, 3);
 
-if((wait_bit_set_32(&PLL_STS, 3)) != 0)
+while((wait_bit_set_32(&PLL_STS, 3)) != 0)
 nop();
 
 writel(&SPI_REF_CTRL, BIT(24));
@@ -287,7 +287,7 @@ putc('\n');
 writel(&APU_PWRCTL, BIT(16));
 
 
-if((wait_bit_clear_32(&APU_PWRSTS, 16)) != 0) nop();
+while((wait_bit_clear_32(&APU_PWRSTS, 16)) != 0) nop();
 
 printf("L2 hardware flush done\n");
 
