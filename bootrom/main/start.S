@@ -80,7 +80,7 @@ b .Lloop_bss
 
 .Lloop_bss_done:
 
-tlbi alle3is
+tlbi alle3is // clean stale TLBs that might be still there after cold boot/restart
 ic ialluis
 dsb sy
 
@@ -94,7 +94,7 @@ orr x0, x0, #(1 << 11) // EOS
 msr sctlr_el3, x0
 isb
 
-msr daifclr, #0x8
+msr daifclr, #0x8 // unmask serror
 
 mrs x0, midr_el1
 ubfx x1, x0, #4, #12
