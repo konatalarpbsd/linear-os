@@ -230,7 +230,7 @@ if((wait_bit_set_32(&PLL_STS, 3)) != 0) wfi();
 writel(&SPI_REF_CTRL, BIT(24));
 writel(&USB0_REF_CTRL, BIT(24));
 val = BIT(1) | BIT(24) | BIT(28);
-// writel(&QSPI_REF_CTRL, cfg);
+writel(&QSPI_REF_CTRL, val);
 writel(&I2C1_REF_CTRL, BIT(24));
 
 val = (6 << 5);
