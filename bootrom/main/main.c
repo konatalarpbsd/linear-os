@@ -176,8 +176,8 @@ writeb(&EFUSE_CFG, 0x2);
 xmpu_ocm_init(&ocm_x, XMPU_OCM_ADDR, 0xfffc0000, 0xffffbfff, val);
 
 writew(&EFUSE_CFG, BIT(1));
-// BIT_CLEAR(EFUSE_PGM_ADDR, 10);
-// BIT_CLEAR(EFUSE_PGM_ADDR, 11);
+EFUSE_PGM_ADDR &= ~BIT(10);
+EFUSE_PGM_ADDR &= ~BIT(11);
 
 writew(&EFUSE_SECCTRL, BIT(6));
 
@@ -242,9 +242,24 @@ nop();
 
 writel(&SPI_REF_CTRL, BIT(24));
 writel(&USB0_REF_CTRL, BIT(24));
-val = BIT(1) | BIT(24) | BIT(28);
+val = BIT(1) | BIT(24);
 writel(&QSPI_REF_CTRL, val);
 writel(&I2C1_REF_CTRL, BIT(24));
+writel(&DBG_LPD_CTRL, val);
+
+for(size_t i = 0; i < 4; i++)
+writel(&PL0_REF_CTRL + i * 4, val);
+
+val = BIT(23) | BIT(19) | BIT(17);
+writel(&RST_LPD_TOP, val);
+
+writel(&RST_LPD_DBG, BIT(15));
+
+val = BIT(0) | BIT(1);
+writel(&PL0_THR_CTRL, val);
+writel(&PL1_THR_CTRL, val);
+writel(&PL2_THR_CTRL, val);
+writel(&PL3_THR_CTRL, val);
 
 val = (6 << 5);
 writel(&MIO_18, val);
