@@ -2,7 +2,7 @@ ENTRY(_start)
 
 MEMORY
 {
-    OCM (rwx) : ORIGIN = 0xffff0000 /* 0xFFFC0000 */, LENGTH = 256K
+    OCM (rwx) : ORIGIN = 0xFFFC0000, LENGTH = 256K
 }
 
 PHDRS {
