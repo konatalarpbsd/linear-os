@@ -156,7 +156,8 @@ sram[i] = EXPCTD_PATTERN;
 
 for(size_t i = 0; i < SIZE; i++) {
 
-if(sram[i] != EXPCTD_PATTERN) while(1);
+if(sram[i] != EXPCTD_PATTERN)
+while(1) wfi();
 
 }
 
@@ -166,7 +167,9 @@ writeb(&RESET_CTRL, BIT(0));
 val2 = 0xDF0D;
 
 writew(&EFUSE_WR_LOCK, val2);
-if((wait_bit_clear_16(&EFUSE_WR_LOCK, 0)) != 0) wfi();
+
+if((wait_bit_clear_16(&EFUSE_WR_LOCK, 0)) != 0)
+nop();
 
 writeb(&EFUSE_CFG, 0x2);
 
@@ -188,12 +191,14 @@ writel(&RPLL_CTRL, BIT(3));
 writel(&IOPLL_CTRL, BIT(0));
 writel(&RPLL_CTRL, BIT(0));
 
-if((wait_bit_clear_32(&CRL_PLL_STS, 0)) != 0) wfi();
+if((wait_bit_clear_32(&CRL_PLL_STS, 0)) != 0)
+nop();
 
 BIT_CLEAR(IOPLL_CTRL, 3);
 BIT_CLEAR(RPLL_CTRL, 3);
 
-if((wait_bit_clear_32(&CRL_PLL_STS, 1)) != 0) wfi();
+if((wait_bit_clear_32(&CRL_PLL_STS, 1)) != 0)
+nop();
 
 val = (3 << 20) | (3 << 24);
 writel(&DPLL_CTRL, val);
@@ -204,16 +209,21 @@ wait_bit_set_32(&PLL_STS, 1);
 
 BIT_CLEAR(DPLL_CTRL, 3);
 
-if((wait_bit_set_32(&PLL_STS, 4)) != 0) wfi();
+if((wait_bit_set_32(&PLL_STS, 4)) != 0)
+nop();
 
 val = (3 << 20) | (3 << 24);
 writel(&VPLL_CTRL, val);
 writel(&VPLL_CTRL, BIT(3));
 writel(&VPLL_CTRL, BIT(0));
 
-if((wait_bit_set_32(&PLL_STS, 2)) != 0) wfi();
+if((wait_bit_set_32(&PLL_STS, 2)) != 0)
+nop();
+
 BIT_CLEAR(VPLL_CTRL, 3);
-if((wait_bit_set_32(&PLL_STS, 5)) != 0) wfi();
+
+if((wait_bit_set_32(&PLL_STS, 5)) != 0)
+nop();
 
 
 val = (3 << 20) | (3 << 24);
@@ -222,10 +232,13 @@ writel(&APLL_CTRL, BIT(3));
 writel(&APLL_CTRL, BIT(0));
 
 
-if((wait_bit_set_32(&PLL_STS, 0)) != 0) wfi();
+if((wait_bit_set_32(&PLL_STS, 0)) != 0)
+nop();
+
 BIT_CLEAR(APLL_CTRL, 3);
 
-if((wait_bit_set_32(&PLL_STS, 3)) != 0) wfi();
+if((wait_bit_set_32(&PLL_STS, 3)) != 0)
+nop();
 
 writel(&SPI_REF_CTRL, BIT(24));
 writel(&USB0_REF_CTRL, BIT(24));
