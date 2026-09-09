@@ -61,7 +61,7 @@ timeout = 0;
 uint32_t mask = BIT(bit);
 
 while(!(*addr & mask)) {
-asm volatile("nop\n" ::: "memory");
+nop();
 
 if(++timeout >= TIMEOUT_MAX) {
 return -2;
@@ -87,7 +87,7 @@ timeout = 0;
 uint32_t mask = BIT(bit);
 
 while((*addr & mask) != 0) {
-asm volatile("nop\n" ::: "memory");
+nop();
 
 if(++timeout >= TIMEOUT_MAX) {
 return -2;
@@ -111,7 +111,7 @@ timeout = 0;
 uint16_t mask = BIT(bit);
 
 while((*addr & mask) != 0) {
-asm volatile("nop\n" ::: "memory");
+nop();
 
 
 if(++timeout >= TIMEOUT_MAX) {
