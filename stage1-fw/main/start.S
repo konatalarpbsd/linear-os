@@ -17,6 +17,7 @@ _start:
 mov x0, #0
 sev
 
+ldr x0, =
 // 4K boundary check
 adr x0, _start
 ands x0, x0, #0xFFF

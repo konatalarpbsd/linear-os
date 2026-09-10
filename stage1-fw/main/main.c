@@ -340,43 +340,7 @@ partition_map_init(&h);
 char *test = "testpartitionmapentry1";
 create_partition(test, 2, 2, 1, 0x4000, 0x2000);
 
-val2 = readw(&BOOT_MODE_USER);
-
-uint16_t boot_mode = (val2 >> 12) & 0xF;
-
-// old code, still thinking plans at this section
-// do not modify
-
-switch(boot_mode) {
-
-case SPI_BOOT:
-printf("booting via SPI\n");
-// spi_boot();
-break;
-
-case SD_BOOT:
-printf("Booting via SD card\n");
-// sd_boot);
-break;
-
-case SATA_BOOT:
-printf("booting via SATA ahci\n");
-// sata_boot);
-break;
-
-case USB_BOOT:
-printf("booting via USB\n");
-// usb_boot();
-break;
-
-default:
-printf("Unknown Boot mode: ");
-puthex(boot_mode);
-printf("\n");
-printf("Defaulting to SPI\n");
-spi_init();
+// To be countined
 while(1) wfi();
-
-}
 
 }
