@@ -18,6 +18,7 @@ Future plans:
 
 Other board support, HALs, Hypervisor, More dynamic code instead of hardcoded, development of linear kernel.
 
+im too busy to develop Linear kernel at the same time with stage1-fw and custom PMUFW 
 
 I recommend to use qemu amd fork to boot linear OS instead of mainline qemu
 
